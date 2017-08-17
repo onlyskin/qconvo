@@ -7,7 +7,7 @@
 - users can set their age(?) - birthdate
 - users can write a small description about themself
 - users can list their hobbies/interests
-- users can choose their avatar(?), should their be avatars or profile pics?
+- users can choose their avatar(?), should there be avatars or profile pics?
 - users can set their preferred exchange method - in person, video call, text chat
 - users can send and receive message to other users
 - users can search for other people who want to learn a given language and filter
