@@ -1,3 +1,6 @@
 from django.test import TestCase
 
-# Create your tests here.
+class ExchangeViewsTestCase(TestCase):
+    def test_index(self):
+        resp = self.client.get('/exchange/')
+        self.assertEqual(resp.status_code, 200)
