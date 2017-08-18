@@ -1,4 +1,8 @@
+import json
+
 from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse("Hello World")
+def users(request):
+    response_data = {"message": "Hello World"}
+    return HttpResponse(json.dumps(response_data),
+                       content_type="application/json")
