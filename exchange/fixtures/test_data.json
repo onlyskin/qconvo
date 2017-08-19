@@ -1,0 +1,20 @@
+[
+{
+    "model": "auth.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$JP69AjOqyChY$dMbqE5ewokH6jyjrRjHQl3Do61dez8eXB4Qg4kb0d3g=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "onlyskin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-08-19T21:55:54.365Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
