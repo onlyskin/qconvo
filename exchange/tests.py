@@ -20,3 +20,9 @@ class ExchangeViewsTestCase(TestCase):
         user_data = resp.json()[0]
         self.assertEqual(user_data['username'], 'onlyskin')
         self.assertEqual(user_data['name'], 'sam'),
+
+    def test_languages(self):
+        resp = self.client.get('/exchange/api/languages/')
+        self.assertEqual(resp.status_code, 200)
+        languages = resp.json()
+        self.assertTrue('english' in languages)

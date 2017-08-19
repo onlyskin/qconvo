@@ -16,5 +16,12 @@
         "groups": [],
         "user_permissions": []
     }
+},
+{
+    "model": "exchange.language",
+    "pk": 1,
+    "fields": {
+        "name": "english"
+    }
 }
 ]
