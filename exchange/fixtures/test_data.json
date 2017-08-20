@@ -23,5 +23,12 @@
     "fields": {
         "name": "english"
     }
+},
+{
+    "model": "exchange.level",
+    "pk": 1,
+    "fields": {
+        "tag": "native"
+    }
 }
 ]

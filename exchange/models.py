@@ -19,3 +19,12 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
+    profiles = models.ManyToManyField(Profile, through='Link')
+
+class Level(models.Model):
+    tag = models.CharField(max_length=30)
+
+class Link(models.Model):
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete = models.CASCADE)
