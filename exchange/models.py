@@ -21,10 +21,17 @@ class Language(models.Model):
     name = models.CharField(max_length=100)
     profiles = models.ManyToManyField(Profile, through='Link')
 
-class Level(models.Model):
-    tag = models.CharField(max_length=30)
+LEVELCHOICE = (
+    ('b', 'beginner'),
+    ('e', 'elementary'),
+    ('p', 'pre-intermediate'),
+    ('i', 'intermediate'),
+    ('u', 'upper-intermediate'),
+    ('a', 'advanced'),
+    ('n', 'native'),
+)
 
 class Link(models.Model):
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    level = models.ForeignKey(Level, on_delete = models.CASCADE)
+    level = models.CharField(max_length=1, choices=LEVELCHOICE)

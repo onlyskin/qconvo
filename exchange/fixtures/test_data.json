@@ -25,10 +25,10 @@
     }
 },
 {
-    "model": "exchange.level",
-    "pk": 1,
+    "model": "exchange.language",
+    "pk": 2,
     "fields": {
-        "tag": "native"
+        "name": "italian"
     }
 }
 ]

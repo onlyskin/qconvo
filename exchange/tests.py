@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from exchange.models import Language
-from exchange.models import Level
 from exchange.models import Link
 
 class ExchangeViewsTestCase(TestCase):
@@ -12,10 +11,10 @@ class ExchangeViewsTestCase(TestCase):
         u = User.objects.get(username='onlyskin')
         u.profile.name = 'sam'
         u.save()
-        language = Language.objects.get(name='english')
-        level = Level.objects.get(tag='native')
-        l = Link(profile=u.profile, language=language, level=level)
-        l.save()
+        l1 = Language.objects.get(name='english')
+        l2 = Language.objects.get(name='italian')
+        Link(profile=u.profile, language=l1, level='n').save()
+        Link(profile=u.profile, language=l2, level='b').save()
 
     def test_index(self):
         resp = self.client.get('/exchange/')
@@ -28,8 +27,8 @@ class ExchangeViewsTestCase(TestCase):
         user_data = resp.json()[0]
         self.assertEqual(user_data['username'], 'onlyskin')
         self.assertEqual(user_data['name'], 'sam'),
-        self.assertEqual(user_data['languages'][0]['language'], 'english')
-        self.assertEqual(user_data['languages'][0]['level'], 'native')
+        self.assertEqual(user_data['native'], ['english']),
+        self.assertEqual(user_data['learning'], ['italian']),
 
     def test_languages(self):
         resp = self.client.get('/exchange/api/languages/')
