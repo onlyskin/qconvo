@@ -5,37 +5,40 @@ from exchange.models import Language
 from exchange.models import Link
 
 class ExchangeViewsTestCase(TestCase):
+    def make_user(self, username, name, native_lang, learning_lang):
+        u = User.objects.create_user(username=username, password='p')
+        u.profile.name = name
+        u.save()
+        u.profile.nativelangs.add(native_lang)
+        Link(profile=u.profile, language=learning_lang, level='b').save()
+        u.save()
+
+    def make_language(self, name):
+        language = Language(name=name)
+        language.save()
+        return language
+
     def setUp(self):
-        u0 = User.objects.create_user(username='onlyskin', password='password');
-        u0.profile.name = 'sam'
-        u0.save()
-        u1 = User.objects.create_user(username='Asia', password='password');
-        u1.profile.name = 'Joanna'
-        u1.save()
-        l1 = Language(name='english')
-        l2 = Language(name='italian')
-        l3 = Language(name='polish')
-        l1.save()
-        l2.save()
-        l3.save()
-        Link(profile=u0.profile, language=l1, level='n').save()
-        Link(profile=u0.profile, language=l2, level='b').save()
-        Link(profile=u1.profile, language=l3, level='n').save()
-        Link(profile=u1.profile, language=l1, level='b').save()
+        english = self.make_language('english')
+        italian = self.make_language('italian')
+        polish = self.make_language('polish')
+        self.make_user('onlyskin', 'sam', english, polish)
+        self.make_user('Asia', 'Joanna', polish, english)
+        self.make_user('Jan', 'J', polish, italian)
 
     def test_index(self):
         resp = self.client.get('/exchange/')
         self.assertEqual(resp.status_code, 200)
         self.assertTrue('qconvo' in resp.content)
 
-    def test_users(self):
-        resp = self.client.get('/exchange/api/users/polish/english')
+    def test_profiles(self):
+        resp = self.client.get('/exchange/api/profiles?n=polish&l=english')
         self.assertEqual(resp.status_code, 200)
-        user_data = resp.json()[0]
-        self.assertEqual(user_data['username'], 'Asia')
-        self.assertEqual(user_data['name'], 'Joanna'),
-        self.assertEqual(user_data['native'], ['polish']),
-        self.assertEqual(user_data['learning'], ['english']),
+        user_data = resp.json()
+        self.assertEqual(len(user_data), 1)
+        self.assertEqual('Joanna', user_data[0]['name']),
+        self.assertEqual(['polish'], user_data[0]['native']),
+        self.assertEqual(['english'], user_data[0]['learning']),
 
     def test_languages(self):
         resp = self.client.get('/exchange/api/languages/')

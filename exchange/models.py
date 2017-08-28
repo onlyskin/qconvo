@@ -7,6 +7,10 @@ from django.core.validators import MinLengthValidator
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, validators=[MinLengthValidator(1)])
+    nativelangs = models.ManyToManyField('Language',
+        related_name='nativeprofiles')
+    learninglangs = models.ManyToManyField('Language', through='Link',
+        related_name='learningprofiles')
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -19,7 +23,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
-    profiles = models.ManyToManyField(Profile, through='Link')
 
 LEVELCHOICE = (
     ('b', 'beginner'),
@@ -28,7 +31,6 @@ LEVELCHOICE = (
     ('i', 'intermediate'),
     ('u', 'upper-intermediate'),
     ('a', 'advanced'),
-    ('n', 'native'),
 )
 
 class Link(models.Model):
