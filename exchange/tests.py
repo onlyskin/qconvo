@@ -29,7 +29,8 @@ class ExchangeViewsTestCase(TestCase):
     def test_index(self):
         resp = self.client.get('/exchange/')
         self.assertEqual(resp.status_code, 200)
-        self.assertTrue('qconvo' in resp.content)
+        self.assertTrue('Hello World' in resp.content)
+        self.assertTrue('<body>' in resp.content)
 
     def test_profiles(self):
         resp = self.client.get('/exchange/api/profiles?n=polish&l=english')

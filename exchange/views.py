@@ -2,12 +2,14 @@ import json
 
 from django.http import HttpResponse
 from django.core import serializers
+from django.template.loader import render_to_string
 
 from profile_serializer import ProfileSerializer
 from exchange.models import Language, Link, Profile
 
 def index(request):
-    return HttpResponse('qconvo')
+    rendered = render_to_string('exchange.html')
+    return HttpResponse(rendered)
 
 def profiles(request):
     native = request.GET.get('n')

@@ -6,3 +6,4 @@ pip-selfcheck.json
 .Python
 *.pyc
 db.sqlite3
+qconvo/staticfiles
