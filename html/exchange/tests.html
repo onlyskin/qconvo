@@ -1,14 +1,11 @@
 {% load static %}
 <meta charset="utf-8">
 <body>
-    <div id="mocha"></div>
-    <div id="messages"></div>
-    <div id="fixtures"></div>
     <script src="{% static "exchange/js/ospec.js" %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.1/mithril.js"></script>
-    <script src="{% static "exchange/js/Results.js" %}"></script>
+    <script src="{% static "exchange/js/mithril.js" %}"></script>
+    <script src="{% static "exchange/js/resultsView.js" %}"></script>
 
-    <script src="{% static "exchange/js/testResults.js" %}"></script>
+    <script src="{% static "exchange/js/testResultsView.js" %}"></script>
     <div class="wrapper"></div>
     <script>o.run()</script>
 </body>
