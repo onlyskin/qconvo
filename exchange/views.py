@@ -7,6 +7,10 @@ from django.template.loader import render_to_string
 from profile_serializer import ProfileSerializer
 from exchange.models import Language, Link, Profile
 
+def tests(request):
+    rendered = render_to_string('tests.html')
+    return HttpResponse(rendered)
+
 def index(request):
     rendered = render_to_string('exchange.html')
     return HttpResponse(rendered)
