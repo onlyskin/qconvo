@@ -11,14 +11,20 @@ from exchange.models import Language
 from exchange.models import Link
 
 languages = ['english', 'polish', 'italian', 'japanese', 'spanish']
-numbers = range(1000)
-random.shuffle(numbers)
+
+with open('sample_names', 'r') as f:
+    names = f.read().split('\n')
+    random.shuffle(names)
+    
+with open('sample_words', 'r') as f:
+    usernames = f.read().split('\n')
+    random.shuffle(usernames)
 
 def make_random_username():
-    return 'user' + str(numbers.pop())
+    return usernames.pop()
 
 def make_random_name():
-    return 'name' + str(numbers.pop())
+    return names.pop()
 
 def make_user(username, name, native_lang, learning_lang):
     u = User.objects.create_user(username=username, password='p')
