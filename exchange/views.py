@@ -26,6 +26,6 @@ def profiles(request):
     return HttpResponse(response_data, content_type='application/json')
 
 def languages(request):
-    data = serializers.serialize('json', Language.objects.all())
+    data = [language.name for language in Language.objects.all()]
     response_data = json.dumps(data)
     return HttpResponse(response_data, content_type = 'application/json')

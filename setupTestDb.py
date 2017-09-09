@@ -11,6 +11,7 @@ from exchange.models import Language
 from exchange.models import Link
 
 languages = ['english', 'polish', 'italian', 'japanese', 'spanish']
+countries = ['United Kingdom', 'Poland', 'Italy', 'Japan', 'Spain']
 
 with open('sample_names', 'r') as f:
     names = f.read().split('\n')
@@ -26,12 +27,19 @@ def make_random_username():
 def make_random_name():
     return names.pop()
 
-def make_user(username, name, native_lang, learning_lang):
+def make_user(username, name, country, age):
     u = User.objects.create_user(username=username, password='p')
     u.profile.name = name
+    u.profile.country = country
+    u.profile.age = age
     u.save()
-    u.profile.nativelangs.add(native_lang)
-    Link(profile=u.profile, language=learning_lang, level='b').save()
+    natives = []
+    natives.append(get_language(random.choice(languages)))
+    learning = get_language(random.choice(languages))
+    while natives[0] == learning:
+        learning = get_language(random.choice(languages))
+    u.profile.nativelangs.add(natives[0])
+    Link(profile=u.profile, language=learning, level='b').save()
     u.save()
 
 def make_language(name):
@@ -43,11 +51,9 @@ def get_language(name):
 
 if __name__ == '__main__':
     [make_language(language) for language in languages]
-    for i in range(500):
+    for i in range(100):
         username = make_random_username()
         name = make_random_name()
-        native = random.choice(languages)
-        learning = random.choice(languages)
-        while native == learning:
-            learning = random.choice(languages)
-        make_user(username, name, get_language(native), get_language(learning))
+        country = random.choice(countries)
+        age = random.randint(0, 99)
+        make_user(username, name, country, age)

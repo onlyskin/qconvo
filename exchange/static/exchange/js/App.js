@@ -1,4 +1,5 @@
 var model = {
+    languages: [],
     users: [
         {'name': 'Sam',
          'country': 'United Kingdom',
@@ -10,7 +11,7 @@ var model = {
          'age': 28,
          'native': ['polish', 'italian'],
          'learning': ['english']},
-    ]
+    ],
 }
 
 var ctrl = {
@@ -23,13 +24,21 @@ var ctrl = {
         m.request({
             method: 'GET',
             url: 'api/profiles',
-            data: {n: that.nativeSearch, l: that.learningSearch}
+            data: {n: that.nativeSearch, l: that.learningSearch},
         })
         .then(function(result) {
             model.users = result;
         });
     },
 }
+
+m.request({
+    method: 'GET',
+    url: 'api/languages',
+})
+.then(function(result) {
+    model.languages = result;
+});
 
 var App = {
     view: function () {
