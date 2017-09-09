@@ -34,7 +34,7 @@ class ExchangeViewsTestCase(TestCase):
         self.assertTrue('qconvo' in resp.content)
         self.assertTrue('<body>' in resp.content)
 
-    def test_profiles(self):
+    def api_profiles_returns_users(self):
         resp = self.client.get('/exchange/api/profiles?n=polish&l=english')
         self.assertEqual(resp.status_code, 200)
         user_data = resp.json()
@@ -44,6 +44,12 @@ class ExchangeViewsTestCase(TestCase):
         self.assertEqual(['english'], user_data[0]['learning'])
         self.assertEqual('Poland', user_data[0]['country'])
         self.assertEqual(28, user_data[0]['age'])
+
+    def api_profiles_returns_empty_list_when_bad_langs(self):
+        resp = self.client.get('/exchange/api/profiles?n=INVALID&l=INVALID')
+        self.assertEqual(resp.status_code, 200)
+        user_data = resp.json()
+        self.assertEqual([], user_data)
 
     def test_languages(self):
         resp = self.client.get('/exchange/api/languages/')
