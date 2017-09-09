@@ -7,6 +7,8 @@ from django.core.validators import MinLengthValidator
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, validators=[MinLengthValidator(1)])
+    country = models.CharField(max_length=100)
+    age = models.IntegerField(null=True)
     nativelangs = models.ManyToManyField('Language',
         related_name='nativeprofiles')
     learninglangs = models.ManyToManyField('Language', through='Link',

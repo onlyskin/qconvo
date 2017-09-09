@@ -10,6 +10,8 @@ class ProfileSerializerTestCase(TestCase):
         u = User.objects.create_user(username='u', password='p')
         p = u.profile
         p.name = 'sam'
+        p.country = 'United Kingdom'
+        p.age = 25
         p.save()
         l1 = Language(name='english')
         l2 = Language(name='italian')
@@ -24,6 +26,8 @@ class ProfileSerializerTestCase(TestCase):
         serializer = ProfileSerializer()
         output = serializer.serialize(self.p)
         self.assertEqual(output['name'], 'sam')
+        self.assertEqual(output['country'], 'United Kingdom')
+        self.assertEqual(output['age'], 25)
         self.assertEqual(output['native'][0], 'english')
         self.assertEqual(output['learning'][0], 'italian')
 
