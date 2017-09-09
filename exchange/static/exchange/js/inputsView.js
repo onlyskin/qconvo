@@ -4,14 +4,14 @@ var inputsView = function() {
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
                         ctrl.setNativeSearch(value);
-                        ctrl.userSearch(value);
+                        ctrl.profileSearch(value);
                     }),
-                    value: ctrl.nativeSearch}),
+                    value: ctrl.getNativeSearch()}),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
                         ctrl.setLearningSearch(value);
-                        ctrl.userSearch(value);
+                        ctrl.profileSearch(value);
                     }),
-                    value: ctrl.learningSearch}),
+                    value: ctrl.getLearningSearch()}),
     ]);
 }
