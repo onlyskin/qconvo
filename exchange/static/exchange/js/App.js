@@ -15,21 +15,26 @@ var model = {
 }
 
 var ctrl = {
-    nativeSearch: '',
-    learningSearch: '',
-    setNativeSearch: function(language) { this.nativeSearch = language; },
-    setLearningSearch: function(language) { this.learningSearch = language; },
+    setNativeSearch: function(language) { this._nativeSearch = language; },
+    setLearningSearch: function(language) { this._learningSearch = language; },
     userSearch: function() {
-        var that = this;
-        m.request({
-            method: 'GET',
-            url: 'api/profiles',
-            data: {n: that.nativeSearch, l: that.learningSearch},
-        })
-        .then(function(result) {
-            model.users = result;
-        });
+        if (this._isValidSearchParams()) {
+            var that = this;
+            m.request({
+                method: 'GET',
+                url: 'api/profiles',
+                data: {n: that._nativeSearch, l: that._learningSearch},
+            })
+            .then(function(result) {
+                model.users = result;
+            });
+        }
     },
+    _isValidSearchParams: function() {
+        return model.languages.includes(this._nativeSearch) && model.languages.includes(this._learningSearch);
+    },
+    _nativeSearch: '',
+    _learningSearch: '',
 }
 
 m.request({
