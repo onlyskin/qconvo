@@ -1,0 +1,11 @@
+.user {
+    padding: 5px;
+}
+
+.name {
+    font-size: 20px;
+}
+
+.native, .learning {
+    padding: 3px;
+}

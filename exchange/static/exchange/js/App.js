@@ -1,5 +1,16 @@
 var model = {
-    users: [{'name': 'sam'}, {'name': 'hex'}],
+    users: [
+        {'name': 'Sam',
+         'country': 'United Kingdom',
+         'age': 25,
+         'native': ['english'],
+         'learning': ['polish', 'italian']},
+        {'name': 'Joanna',
+         'country': 'Poland',
+         'age': 28,
+         'native': ['polish', 'italian'],
+         'learning': ['english']},
+    ]
 }
 
 var ctrl = {
