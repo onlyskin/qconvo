@@ -31,5 +31,6 @@ class ProfileSerializerTestCase(TestCase):
         self.assertEqual(output['country'], 'United Kingdom')
         self.assertEqual(output['age'], 25)
         self.assertEqual(output['native'][0], 'english')
-        self.assertEqual(output['learning'][0], 'italian')
+        self.assertEqual(output['learning'][0]['name'], 'italian')
+        self.assertEqual(output['learning'][0]['level'], 'b')
 

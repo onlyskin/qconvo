@@ -8,5 +8,8 @@ class ProfileSerializer():
         output['country'] = profile.country.name
         output['age'] = profile.age
         output['native'] = [l.name for l in profile.nativelangs.all()]
-        output['learning'] = [l.name for l in profile.learninglangs.all()]
+        output['learning'] = [{
+            'name': l.name,
+            'level': l.link_set.get().level,
+            } for l in profile.learninglangs.all()]
         return output
