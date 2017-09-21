@@ -7,8 +7,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 
-from exchange.models import Language
-from exchange.models import Link
+from exchange.models import Language, Country, Link
 
 languages = ['english', 'polish', 'italian', 'japanese', 'spanish']
 countries = ['United Kingdom', 'Poland', 'Italy', 'Japan', 'Spain']
@@ -49,11 +48,19 @@ def make_language(name):
 def get_language(name):
     return Language.objects.get(name=name)
 
+def make_country(name):
+    country = Country(name=name)
+    country.save()
+
+def get_country(name):
+    return Country.objects.get(name=name)
+
 if __name__ == '__main__':
     [make_language(language) for language in languages]
+    [make_country(country) for country in countries]
     for i in range(100):
         username = make_random_username()
         name = make_random_name()
-        country = random.choice(countries)
+        country = get_country(random.choice(countries))
         age = random.randint(0, 99)
         make_user(username, name, country, age)
