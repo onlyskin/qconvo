@@ -11,6 +11,7 @@ from exchange.models import Language, Country, Link
 
 languages = ['english', 'polish', 'italian', 'japanese', 'spanish']
 countries = ['United Kingdom', 'Poland', 'Italy', 'Japan', 'Spain']
+levels = ['b', 'e', 'p', 'i', 'u', 'a']
 
 with open('sample_names', 'r') as f:
     names = f.read().split('\n')
@@ -38,7 +39,7 @@ def make_user(username, name, country, age):
     while natives[0] == learning:
         learning = get_language(random.choice(languages))
     u.profile.nativelangs.add(natives[0])
-    Link(profile=u.profile, language=learning, level='b').save()
+    Link(profile=u.profile, language=learning, level=random.choice(levels)).save()
     u.save()
 
 def make_language(name):
