@@ -29,5 +29,12 @@ var inputsView = function() {
                             ctrl.setMaxAge(value);
                     }), value: ctrl.getMaxAge()}
         ),
+        m('datalist', {id: 'countries'}, model.countries.map(c => m('option', {value: c}))),
+        m('input', {list: 'countries',
+                    oninput: m.withAttr('value', function(value) {
+                        ctrl.setCountry(value);
+                    }),
+                    value: ctrl.getCountry()}
+        ),
     ]);
 }

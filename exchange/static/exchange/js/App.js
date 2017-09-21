@@ -13,6 +13,8 @@ var ctrl = {
     getMinAge: function(age) { return this._minAge; },
     setMaxAge: function(age) { this._maxAge = age; },
     getMaxAge: function(age) { return this._maxAge; },
+    setCountry: function(country) { this._country = country; },
+    getCountry: function(country) { return this._country; },
     _populateData: function(url, modelFieldName) {
         that = this;
         m.request({
@@ -44,7 +46,9 @@ var ctrl = {
         }
     },
     profileFilter: function(user) {
-        return user.age >= this._minAge && user.age <= this._maxAge;
+        var countryMatch = user.country == this._country || !model.countries.includes(this._country);
+        var ageRangeMatch = user.age >= this._minAge && user.age <= this._maxAge;
+        return countryMatch && ageRangeMatch;
     },
     _isValidSearchParams: function() {
         return (model.languages.includes(this._nativeSearch) &&
@@ -54,6 +58,7 @@ var ctrl = {
     _learningSearch: 'polish',
     _minAge: 0,
     _maxAge: 100,
+    _country: 'Poland',
 }
 
 ctrl.populateLanguages();
