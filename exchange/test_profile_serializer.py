@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from exchange.models import Language, Link, Profile
+from exchange.models import Language, Country, Link, Profile
 
 from profile_serializer import ProfileSerializer
 
@@ -10,7 +10,9 @@ class ProfileSerializerTestCase(TestCase):
         u = User.objects.create_user(username='u', password='p')
         p = u.profile
         p.name = 'sam'
-        p.country = 'United Kingdom'
+        c = Country(name='United Kingdom')
+        c.save()
+        p.country = c
         p.age = 25
         p.save()
         l1 = Language(name='english')

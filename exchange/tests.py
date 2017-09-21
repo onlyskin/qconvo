@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from exchange.models import Language
-from exchange.models import Link
+from exchange.models import Language, Country, Link
 
 class ExchangeViewsTestCase(TestCase):
     def make_user(self, username, name, native_lang, learning_lang, country, age):
@@ -20,13 +19,20 @@ class ExchangeViewsTestCase(TestCase):
         language.save()
         return language
 
+    def make_country(self, name):
+        country = Country(name=name)
+        country.save()
+        return country
+
     def setUp(self):
         english = self.make_language('english')
         italian = self.make_language('italian')
         polish = self.make_language('polish')
-        self.make_user('onlyskin', 'sam', english, polish, 'United Kingdom', 26)
-        self.make_user('Asia', 'Joanna', polish, english, 'Poland', 28)
-        self.make_user('Jan', 'J', polish, italian, 'Poland', 15)
+        unitedKingdom = self.make_country('United Kingdom')
+        poland = self.make_country('Poland')
+        self.make_user('onlyskin', 'sam', english, polish, unitedKingdom, 26)
+        self.make_user('Asia', 'Joanna', polish, english, poland, 28)
+        self.make_user('Jan', 'J', polish, italian, poland, 15)
 
     def test_index(self):
         resp = self.client.get('/exchange/')
@@ -56,3 +62,9 @@ class ExchangeViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         languages = resp.json()
         self.assertTrue('english' in languages)
+
+    def test_countries(self):
+        resp = self.client.get('/exchange/api/countries/')
+        self.assertEqual(resp.status_code, 200)
+        countries = resp.json()
+        self.assertTrue('United Kingdom' in countries)

@@ -5,7 +5,7 @@ from django.core import serializers
 from django.template.loader import render_to_string
 
 from profile_serializer import ProfileSerializer
-from exchange.models import Language, Link, Profile
+from exchange.models import Language, Country, Link, Profile
 
 def tests(request):
     rendered = render_to_string('tests.html')
@@ -27,5 +27,10 @@ def profiles(request):
 
 def languages(request):
     data = [language.name for language in Language.objects.all()]
+    response_data = json.dumps(data)
+    return HttpResponse(response_data, content_type = 'application/json')
+
+def countries(request):
+    data = [country.name for country in Country.objects.all()]
     response_data = json.dumps(data)
     return HttpResponse(response_data, content_type = 'application/json')
