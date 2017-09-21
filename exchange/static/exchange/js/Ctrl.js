@@ -1,7 +1,5 @@
 class Ctrl {
     constructor(model, dataPopulator) {
-        this._nativeSearch = 'english';
-        this._learningSearch = 'polish';
         this._minAge = 0;
         this._maxAge = 100;
         this._country = 'Poland';
@@ -9,10 +7,6 @@ class Ctrl {
         this.dataPopulator = dataPopulator;
     } 
 
-    get nativeSearch() { return this._nativeSearch; }
-    set nativeSearch(language) { this._nativeSearch = language; }
-    get learningSearch() { return this._learningSearch; }
-    set learningSearch(language) { this._learningSearch = language; }
     get minAge() { return this._minAge; }
     set minAge(age) { this._minAge = age; }
     get maxAge() { return this._maxAge; }
@@ -25,8 +19,8 @@ class Ctrl {
     }
 
     profileFilter(user) {
-        var countryMatch = user.country == this._country || !this.model.countries.includes(this._country);
-        var ageRangeMatch = user.age >= this._minAge && user.age <= this._maxAge;
+        var countryMatch = user.country == this.country || !this.model.isValidCountry(this.country);
+        var ageRangeMatch = user.age >= this.minAge && user.age <= this.maxAge;
         return countryMatch && ageRangeMatch;
     }
 }

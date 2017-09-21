@@ -5,14 +5,15 @@ var model = {
     isValidLanguage: function(language) {
         return this.languages.includes(language);
     },
+    isValidCountry: function(country) {
+        return this.countries.includes(country);
+    },
 }
 
 var dataPopulator = new DataPopulator(model);
 var ctrl = new Ctrl(model, dataPopulator);
 
-dataPopulator.populate(function() {
-    ctrl.profileSearch();
-});
+dataPopulator.initialise();
 
 var App = {
     view: function () {

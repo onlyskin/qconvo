@@ -3,17 +3,17 @@ var inputsView = function() {
         m('datalist', {id: 'languages'}, model.languages.map(l => m('option', {value: l}))),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
-                        ctrl.nativeSearch = value;
-                        ctrl.profileSearch(value);
+                        dataPopulator.nativeSearch = value;
+                        dataPopulator.populateUsers();
                     }),
-                    value: ctrl.nativeSearch}
+                    value: dataPopulator.nativeSearch}
         ),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
-                        ctrl.learningSearch = value;
-                        ctrl.profileSearch(value);
+                        dataPopulator.learningSearch = value;
+                        dataPopulator.populateUsers();
                     }),
-                    value: ctrl.learningSearch}
+                    value: dataPopulator.learningSearch}
         ),
         m('input', {type: 'number',
                         min: 0,

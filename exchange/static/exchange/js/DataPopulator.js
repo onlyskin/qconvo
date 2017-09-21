@@ -1,15 +1,22 @@
 class DataPopulator {
     constructor(model) {
+        this._nativeSearch = 'english';
+        this._learningSearch = 'polish';
         this.model = model;
     }
 
-    populateUsers(native, learning) {
-        if (this._isValidSearchParams(native, learning)) {
+    get nativeSearch() { return this._nativeSearch; }
+    set nativeSearch(language) { this._nativeSearch = language; }
+    get learningSearch() { return this._learningSearch; }
+    set learningSearch(language) { this._learningSearch = language; }
+
+    populateUsers() {
+        if (this._isValidSearch()) {
             var that = this;
             m.request({
                 method: 'GET',
                 url: 'api/profiles',
-                data: {n: native, l: learning},
+                data: {n: that.nativeSearch, l: that.learningSearch},
             })
             .then(function(result) {
                 that.model.users = result;
@@ -17,16 +24,17 @@ class DataPopulator {
         }
     }
     
-    populate(callback) {
-        this._populateData('api/languages', 'languages', callback);
-        this._populateData('api/countries', 'countries', callback);
+    initialise(callback) {
+        this._populateData('api/languages', 'languages');
+        this._populateData('api/countries', 'countries');
     }
     
-    _isValidSearchParams(native, learning) {
-        return this.model.isValidLanguage(native) && this.model.isValidLanguage(learning);
+    _isValidSearch() {
+        return this.model.isValidLanguage(this.nativeSearch) &&
+            this.model.isValidLanguage(this.learningSearch);
     }
 
-    _populateData(url, modelFieldName, callback) {
+    _populateData(url, modelFieldName) {
         var that = this;
         m.request({
             method: 'GET',
@@ -34,7 +42,7 @@ class DataPopulator {
         })
         .then(function(result) {
             that.model[modelFieldName] = result;
-            callback();
+            that.populateUsers();
         });
     }
 }
