@@ -6,19 +6,28 @@ var inputsView = function() {
                         ctrl.setNativeSearch(value);
                         ctrl.profileSearch(value);
                     }),
-                    value: ctrl.getNativeSearch()}),
+                    value: ctrl.getNativeSearch()}
+        ),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
                         ctrl.setLearningSearch(value);
                         ctrl.profileSearch(value);
                     }),
-                    value: ctrl.getLearningSearch()}),
+                    value: ctrl.getLearningSearch()}
+        ),
         m('input', {type: 'number',
                         min: 0,
                         max: 200,
                         oninput: m.withAttr('value', function(value) {
-                        ctrl.setMinAge(value);
-                    }),
-                    value: ctrl.getMinAge()}),
+                            ctrl.setMinAge(value);
+                    }), value: ctrl.getMinAge()}
+        ),
+        m('input', {type: 'number',
+                        min: 0,
+                        max: 200,
+                        oninput: m.withAttr('value', function(value) {
+                            ctrl.setMaxAge(value);
+                    }), value: ctrl.getMaxAge()}
+        ),
     ]);
 }

@@ -11,6 +11,8 @@ var ctrl = {
     getLearningSearch: function(language) { return this._learningSearch; },
     setMinAge: function(age) { this._minAge = age; },
     getMinAge: function(age) { return this._minAge; },
+    setMaxAge: function(age) { this._maxAge = age; },
+    getMaxAge: function(age) { return this._maxAge; },
     _populateData: function(url, modelFieldName) {
         that = this;
         m.request({
@@ -42,7 +44,7 @@ var ctrl = {
         }
     },
     profileFilter: function(user) {
-        return user.age > this._minAge;
+        return user.age >= this._minAge && user.age <= this._maxAge;
     },
     _isValidSearchParams: function() {
         return (model.languages.includes(this._nativeSearch) &&
@@ -51,6 +53,7 @@ var ctrl = {
     _nativeSearch: 'english',
     _learningSearch: 'polish',
     _minAge: 0,
+    _maxAge: 100,
 }
 
 ctrl.populateLanguages();
