@@ -1,5 +1,5 @@
 var resultsView = function(users) {
-    return m('.container', users.map(user => m('.user', [
+    return m('.container', users.filter(ctrl.profileFilter.bind(ctrl)).map(user => m('.user', [
         m('.name', user.name),
         m('.country', user.country),
         m('.age', user.age),

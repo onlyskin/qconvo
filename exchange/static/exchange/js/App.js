@@ -39,12 +39,16 @@ var ctrl = {
             });
         }
     },
+    profileFilter: function(user) {
+        return user.age > this._minAge;
+    },
     _isValidSearchParams: function() {
         return (model.languages.includes(this._nativeSearch) &&
             model.languages.includes(this._learningSearch));
     },
     _nativeSearch: 'english',
     _learningSearch: 'polish',
+    _minAge: 0,
 }
 
 ctrl.populateLanguages();
