@@ -21,19 +21,12 @@ class Ctrl {
     set country(country) { this._country = country; }
 
     profileSearch() {
-        if (this._isValidSearchParams()) {
-            this.dataPopulator.populateUsers(this.nativeSearch, this.learningSearch);
-        }
+        this.dataPopulator.populateUsers(this.nativeSearch, this.learningSearch);
     }
 
     profileFilter(user) {
         var countryMatch = user.country == this._country || !this.model.countries.includes(this._country);
         var ageRangeMatch = user.age >= this._minAge && user.age <= this._maxAge;
         return countryMatch && ageRangeMatch;
-    }
-
-    _isValidSearchParams() {
-        return model.isValidLanguage(this.nativeSearch) &&
-            model.isValidLanguage(this.learningSearch);
     }
 }
