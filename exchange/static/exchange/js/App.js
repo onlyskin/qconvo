@@ -7,9 +7,9 @@ var model = {
     },
 }
 
-var ctrl = new Ctrl(model);
-
 var dataPopulator = new DataPopulator(model);
+var ctrl = new Ctrl(model, dataPopulator);
+
 dataPopulator.populate(function() {
     ctrl.profileSearch();
 });

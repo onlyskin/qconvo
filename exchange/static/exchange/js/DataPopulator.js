@@ -3,6 +3,18 @@ class DataPopulator {
         this.model = model;
     }
 
+    populateUsers(nativeLanguage, learningLanguage) {
+        var that = this;
+        m.request({
+            method: 'GET',
+            url: 'api/profiles',
+            data: {n: nativeLanguage, l: learningLanguage},
+        })
+        .then(function(result) {
+            that.model.users = result;
+        });
+    }
+    
     populate(callback) {
         this._populateData('api/languages', 'languages', callback);
         this._populateData('api/countries', 'countries', callback);

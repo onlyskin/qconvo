@@ -1,11 +1,12 @@
 class Ctrl {
-    constructor(model) {
+    constructor(model, dataPopulator) {
         this._nativeSearch = 'english';
         this._learningSearch = 'polish';
         this._minAge = 0;
         this._maxAge = 100;
         this._country = 'Poland';
         this.model = model;
+        this.dataPopulator = dataPopulator;
     } 
 
     get nativeSearch() { return this._nativeSearch; }
@@ -21,15 +22,7 @@ class Ctrl {
 
     profileSearch() {
         if (this._isValidSearchParams()) {
-            var that = this;
-            m.request({
-                method: 'GET',
-                url: 'api/profiles',
-                data: {n: that._nativeSearch, l: that._learningSearch},
-            })
-            .then(function(result) {
-                that.model.users = result;
-            });
+            this.dataPopulator.populateUsers(this.nativeSearch, this.learningSearch);
         }
     }
 
