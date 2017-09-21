@@ -1,5 +1,6 @@
 var model = {
     languages: [],
+    countries: [],
     users: [],
 }
 
@@ -8,16 +9,22 @@ var ctrl = {
     getNativeSearch: function(language) { return this._nativeSearch; },
     setLearningSearch: function(language) { this._learningSearch = language; },
     getLearningSearch: function(language) { return this._learningSearch; },
-    populateLanguages: function() {
+    _populateData: function(url, modelFieldName) {
         that = this;
         m.request({
             method: 'GET',
-            url: 'api/languages',
+            url: url
         })
         .then(function(result) {
-            model.languages = result;
+            model[modelFieldName] = result;
             that.profileSearch();
         });
+    },
+    populateLanguages: function() {
+        this._populateData('api/languages', 'languages');
+    },
+    populateCountries: function() {
+        this._populateData('api/countries', 'countries');
     },
     profileSearch: function() {
         if (this._isValidSearchParams()) {
@@ -41,6 +48,7 @@ var ctrl = {
 }
 
 ctrl.populateLanguages();
+ctrl.populateCountries();
 
 var App = {
     view: function () {
