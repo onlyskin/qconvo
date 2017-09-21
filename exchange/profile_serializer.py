@@ -10,6 +10,6 @@ class ProfileSerializer():
         output['native'] = [l.name for l in profile.nativelangs.all()]
         output['learning'] = [{
             'name': l.name,
-            'level': l.link_set.get().level,
+            'level': l.link_set.all().filter(profile=profile).get().level,
             } for l in profile.learninglangs.all()]
         return output
