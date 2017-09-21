@@ -9,3 +9,7 @@
 .native, .learning {
     padding: 3px;
 }
+
+span {
+    padding: 5px;
+}
