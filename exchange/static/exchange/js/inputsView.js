@@ -3,38 +3,38 @@ var inputsView = function() {
         m('datalist', {id: 'languages'}, model.languages.map(l => m('option', {value: l}))),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
-                        ctrl.setNativeSearch(value);
+                        ctrl.nativeSearch = value;
                         ctrl.profileSearch(value);
                     }),
-                    value: ctrl.getNativeSearch()}
+                    value: ctrl.nativeSearch}
         ),
         m('input', {list: 'languages',
                     oninput: m.withAttr('value', function(value) {
-                        ctrl.setLearningSearch(value);
+                        ctrl.learningSearch = value;
                         ctrl.profileSearch(value);
                     }),
-                    value: ctrl.getLearningSearch()}
+                    value: ctrl.learningSearch}
         ),
         m('input', {type: 'number',
                         min: 0,
                         max: 200,
                         oninput: m.withAttr('value', function(value) {
-                            ctrl.setMinAge(value);
-                    }), value: ctrl.getMinAge()}
+                            ctrl.minAge = value;
+                    }), value: ctrl.minAge}
         ),
         m('input', {type: 'number',
                         min: 0,
                         max: 200,
                         oninput: m.withAttr('value', function(value) {
-                            ctrl.setMaxAge(value);
-                    }), value: ctrl.getMaxAge()}
+                            ctrl.maxAge = value;
+                    }), value: ctrl.maxAge}
         ),
         m('datalist', {id: 'countries'}, model.countries.map(c => m('option', {value: c}))),
         m('input', {list: 'countries',
                     oninput: m.withAttr('value', function(value) {
-                        ctrl.setCountry(value);
+                        ctrl.country = value;
                     }),
-                    value: ctrl.getCountry()}
+                    value: ctrl.country}
         ),
     ]);
 }
