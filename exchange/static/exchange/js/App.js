@@ -9,6 +9,8 @@ var ctrl = {
     getNativeSearch: function(language) { return this._nativeSearch; },
     setLearningSearch: function(language) { this._learningSearch = language; },
     getLearningSearch: function(language) { return this._learningSearch; },
+    setMinAge: function(age) { this._minAge = age; },
+    getMinAge: function(age) { return this._minAge; },
     _populateData: function(url, modelFieldName) {
         that = this;
         m.request({

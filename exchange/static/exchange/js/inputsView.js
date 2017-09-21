@@ -13,5 +13,12 @@ var inputsView = function() {
                         ctrl.profileSearch(value);
                     }),
                     value: ctrl.getLearningSearch()}),
+        m('input', {type: 'number',
+                        min: 0,
+                        max: 200,
+                        oninput: m.withAttr('value', function(value) {
+                        ctrl.setMinAge(value);
+                    }),
+                    value: ctrl.getMinAge()}),
     ]);
 }
