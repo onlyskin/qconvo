@@ -59,7 +59,7 @@ def get_country(name):
 if __name__ == '__main__':
     [make_language(language) for language in languages]
     [make_country(country) for country in countries]
-    for i in range(100):
+    for i in range(300):
         username = make_random_username()
         name = make_random_name()
         country = get_country(random.choice(countries))

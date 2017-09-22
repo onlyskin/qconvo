@@ -14,10 +14,6 @@ class Ctrl {
     get country() { return this._country; }
     set country(country) { this._country = country; }
 
-    profileSearch() {
-        this.dataPopulator.populateUsers(this.nativeSearch, this.learningSearch);
-    }
-
     profileFilter(user) {
         var countryMatch = user.country == this.country || !this.model.isValidCountry(this.country);
         var ageRangeMatch = user.age >= this.minAge && user.age <= this.maxAge;
