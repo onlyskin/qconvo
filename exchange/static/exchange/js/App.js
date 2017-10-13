@@ -28,6 +28,7 @@ var Profile = {
     view: function() {
         return m('',
             m(Header),
+            profileView(model.profile)
         );
     }
 }

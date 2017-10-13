@@ -2,6 +2,7 @@ class Model {
     constructor() {
         this.languages = [];
         this.countries = [];
+        this.profile = {};
         this.users = [];
         this._nativeSearch = 'english';
         this._learningSearch = 'polish';
