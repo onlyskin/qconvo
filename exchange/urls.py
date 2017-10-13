@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^api/profiles$', views.profiles, name='profiles'),
     url(r'^api/languages/$', views.languages, name='languages'),
     url(r'^api/countries/$', views.countries, name='countries'),
+    url(r'^api/profile$', views.profile, name='profile'),
 ]

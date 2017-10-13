@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 from django.core import serializers
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 from profile_serializer import ProfileSerializer
 from exchange.models import Language, Country, Link, Profile
@@ -34,3 +35,11 @@ def countries(request):
     data = [country.name for country in Country.objects.all()]
     response_data = json.dumps(data)
     return HttpResponse(response_data, content_type = 'application/json')
+
+@login_required
+def profile(request):
+    profile = request.user.profile
+    s = ProfileSerializer()
+    response_data = json.dumps(s.serialize(profile))
+    return HttpResponse(response_data, content_type = 'application/json')
+

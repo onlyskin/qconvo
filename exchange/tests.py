@@ -68,3 +68,16 @@ class ExchangeViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         countries = resp.json()
         self.assertTrue('United Kingdom' in countries)
+
+    def test_profile(self):
+        self.client.login(username='onlyskin', password='p')
+        resp = self.client.get('/exchange/api/profile')
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        self.assertEqual('sam', data['name'])
+        self.assertEqual(26, data['age'])
+        self.assertEqual('United Kingdom', data['country'])
+        self.assertEqual('english', data['native'][0])
+        self.assertEqual('polish', data['learning'][0]['name'])
+        self.assertEqual('b', data['learning'][0]['level'])
+
