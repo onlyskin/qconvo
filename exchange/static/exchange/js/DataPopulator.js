@@ -16,6 +16,9 @@ class DataPopulator {
             url: url,
         })
         .then(function(result) {
+            result = result.map(function(s) {
+                return s.toLowerCase();
+            });
             that.model[modelFieldName] = result;
             that.profileFetcher.populateUsers();
         });

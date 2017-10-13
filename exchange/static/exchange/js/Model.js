@@ -17,6 +17,6 @@ class Model {
     }
 
     isValidCountry(country) {
-        return this.countries.includes(country);
+        return this.countries.includes(country.toLowerCase());
     }
 }

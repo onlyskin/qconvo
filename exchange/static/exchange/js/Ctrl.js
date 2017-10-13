@@ -15,7 +15,8 @@ class Ctrl {
     set country(country) { this._country = country; }
 
     profileFilter(user) {
-        var countryMatch = user.country == this.country || !this.model.isValidCountry(this.country);
+        var countryMatch = user.country.toLowerCase() == this.country.toLowerCase()
+            || !this.model.isValidCountry(this.country);
         var ageRangeMatch = user.age >= this.minAge && user.age <= this.maxAge;
         return countryMatch && ageRangeMatch;
     }
