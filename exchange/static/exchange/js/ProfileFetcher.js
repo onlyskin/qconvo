@@ -9,7 +9,8 @@ class ProfileFetcher {
             m.request({
                 method: 'GET',
                 url: 'api/profiles',
-                data: {n: that.model.nativeSearch, l: that.model.learningSearch},
+                data: {n: that.model.nativeSearch.toLowerCase(),
+                       l: that.model.learningSearch.toLowerCase()},
             })
             .then(function(result) {
                 that.model.users = result;

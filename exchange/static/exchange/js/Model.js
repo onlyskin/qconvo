@@ -13,7 +13,7 @@ class Model {
     set learningSearch(language) { this._learningSearch = language; }
     
     isValidLanguage(language) {
-        return this.languages.includes(language);
+        return this.languages.includes(language.toLowerCase());
     }
 
     isValidCountry(country) {
