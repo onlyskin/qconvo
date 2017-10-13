@@ -16,5 +16,8 @@
 <script src="{% static "exchange/js/App.js" %}"></script>
 <script>
     var root = document.getElementById('mithril-root');
-    m.mount(root, App);
+    m.route(root, '/search', {
+        '/search': Search,
+        '/profile': Profile,
+    });
 </script>
